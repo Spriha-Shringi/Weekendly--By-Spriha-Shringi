@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-light: #14b8a6; /* teal-500 */
+  --color-primary-dark: #6366f1;  /* indigo-500 */
+}
 
 :root {
 --bg: 255 255 255;
@@ -32,5 +36,4 @@ body { @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))] antialiased; }
 
 /* Focus ring */
 .focus-ring { @apply focus:outline-none focus:ring-2 focus:ring-[rgb(var(--primary))] focus:ring-offset-2 focus:ring-offset-[rgb(var(--bg))]; }
-
 
