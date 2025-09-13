@@ -16,7 +16,12 @@ interface ScheduleState {
   add: (day: DayId, a: Activity) => void;
   remove: (day: DayId, instanceId: string) => void;
   moveWithinDay: (day: DayId, from: number, to: number) => void;
-  transfer: (fromDay: DayId, toDay: DayId, instanceId: string, toIndex?: number) => void;
+  transfer: (
+    fromDay: DayId,
+    toDay: DayId,
+    instanceId: string,
+    toIndex?: number
+  ) => void;
   setMood: (day: DayId, instanceId: string, mood: Mood) => void;
   clearAll: () => void;
 }

@@ -1,39 +1,64 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-light: #14b8a6; /* teal-500 */
-  --color-primary-dark: #6366f1;  /* indigo-500 */
+  --color-primary-light: #14b8a6;
+  /* teal-500 */
+  --color-primary-dark: #6366f1;
+  /* indigo-500 */
 }
 
 :root {
---bg: 255 255 255;
---fg: 15 23 42; /* slate-900 */
---muted: 100 116 139; /* slate-500 */
---primary: 59 130 246; /* blue-500 */
---card: 248 250 252; /* slate-50 */
+  --bg: 255 255 255;
+  --fg: 15 23 42;
+  /* slate-900 */
+  --muted: 100 116 139;
+  /* slate-500 */
+  --primary: 59 130 246;
+  /* blue-500 */
+  --card: 248 250 252;
+  /* slate-50 */
 }
 
 
 html[data-theme='dark'] {
---bg: 2 6 23; /* slate-950 */
---fg: 226 232 240; /* slate-200 */
---muted: 148 163 184; /* slate-400 */
---primary: 99 102 241; /* indigo-500 */
---card: 15 23 42; /* slate-900 */
-transition: background-color 0.5s ease, color 0.5s ease;
+  --bg: 2 6 23;
+  /* slate-950 */
+  --fg: 226 232 240;
+  /* slate-200 */
+  --muted: 148 163 184;
+  /* slate-400 */
+  --primary: 99 102 241;
+  /* indigo-500 */
+  --card: 15 23 42;
+  /* slate-900 */
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 
-body { @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))] antialiased; }
+body {
+  @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))] antialiased;
+}
 
 
 /* Utility chips */
-.mood-relaxed{ @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300; }
-.mood-energetic{ @apply bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300; }
-.mood-happy{ @apply bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300; }
-.mood-focused{ @apply bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300; }
+.mood-relaxed {
+  @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300;
+}
+
+.mood-energetic {
+  @apply bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300;
+}
+
+.mood-happy {
+  @apply bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300;
+}
+
+.mood-focused {
+  @apply bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300;
+}
 
 
 /* Focus ring */
-.focus-ring { @apply focus:outline-none focus:ring-2 focus:ring-[rgb(var(--primary))] focus:ring-offset-2 focus:ring-offset-[rgb(var(--bg))]; }
-
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-[rgb(var(--primary))] focus:ring-offset-2 focus:ring-offset-[rgb(var(--bg))];
+}
