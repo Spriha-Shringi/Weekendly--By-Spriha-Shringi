@@ -1,5 +1,5 @@
 import type { Activity } from "../types";
-import { Button, Badge, Card, GhostButton } from "../components/ui.tsx";
+import { Button, Badge, GhostButton } from "../components/ui.tsx";
 
 const categoryThemes = {
   Culinary: {
@@ -64,7 +64,7 @@ export function ActivityCard({ a, onAdd }: { a: Activity; onAdd: () => void }) {
   const theme = categoryThemes[a.category as keyof typeof categoryThemes] || categoryThemes.Custom;
   
   return (
-    <Card className={`p-4 flex items-center justify-between gap-3 min-w-0 ${theme.bg} ${theme.border} border-2 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] activity-card`}>
+    <div className={`p-4 flex items-center justify-between gap-3 min-w-0 rounded-2xl shadow-sm ${theme.bg} ${theme.border} border-2 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] activity-card`}>
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <span className="text-2xl flex-shrink-0" aria-hidden>
           {a.icon}
@@ -88,6 +88,6 @@ export function ActivityCard({ a, onAdd }: { a: Activity; onAdd: () => void }) {
           📍 Find Places
         </GhostButton>
       </div>
-    </Card>
+    </div>
   );
 }
