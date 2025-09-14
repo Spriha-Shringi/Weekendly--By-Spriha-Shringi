@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Button, GhostButton, Modal } from "./ui.tsx";
+import { Button, GhostButton, Modal } from "./ui.tsx";
 
 interface AIChatbotProps {
   currentActivities: string[];
@@ -24,11 +24,11 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
         return;
       }
 
-      const context = `
-        Current weekend plan: ${days.join(", ")}
-        Current activities: ${currentActivities.length > 0 ? currentActivities.join(", ") : "None yet"}
-        User query: ${userQuery || "Suggest weekend activities"}
-      `;
+      // const context = `
+      //   Current weekend plan: ${days.join(", ")}
+      //   Current activities: ${currentActivities.length > 0 ? currentActivities.join(", ") : "None yet"}
+      //   User query: ${userQuery || "Suggest weekend activities"}
+      // `;
 
       const contextInfo = `My weekend plan includes ${days.join(", ")}. ${currentActivities.length > 0 ? `I already have these activities planned: ${currentActivities.join(", ")}.` : "I haven't planned any activities yet."}`;
       
