@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Button, GhostButton, Modal } from "./ui.tsx";
+import { GhostButton, Modal } from "./ui.tsx";
 import { useSchedule } from "../store";
 
 export function DatePicker() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
   
   const days = useSchedule((s) => s.days);
 
@@ -24,7 +23,7 @@ export function DatePicker() {
         const sunday = new Date(currentDate);
         sunday.setDate(saturday.getDate() + 1);
         
-        const daysDiff = Math.ceil((saturday - now) / (1000 * 60 * 60 * 24));
+        const daysDiff = Math.ceil((saturday.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
         
         let label;
         if (daysDiff <= 1) label = "This Weekend";
@@ -65,8 +64,8 @@ export function DatePicker() {
   };
 
   const selectWeekend = (saturday: Date, sunday: Date) => {
-    const satStr = `${saturday.getFullYear()}-${(saturday.getMonth() + 1).toString().padStart(2, '0')}-${saturday.getDate().toString().padStart(2, '0')}`;
-    setSelectedDate(satStr);
+    // const satStr = `${saturday.getFullYear()}-${(saturday.getMonth() + 1).toString().padStart(2, '0')}-${saturday.getDate().toString().padStart(2, '0')}`;
+    // setSelectedDate(satStr);
     setIsOpen(false);
     
     // Calculate all days for this weekend

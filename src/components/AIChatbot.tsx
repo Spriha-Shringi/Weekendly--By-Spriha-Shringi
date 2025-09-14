@@ -81,7 +81,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
       setSuggestedActivities(suggestedFromResponse.slice(0, 3));
       
       // Only suggest activities that are actually available in our catalog
-      const availableActivityWords = availableActivityNames.map(name => name.toLowerCase());
+      // const availableActivityWords = availableActivityNames.map(name => name.toLowerCase());
       
       // Additional custom activities that can be quick-added
       const quickAddableCustoms = [
@@ -94,7 +94,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
       // Also extract activities mentioned with **bold** formatting
       const boldActivities = aiResponse.match(/\*\*(.*?)\*\*/g);
       const extractedBoldActivities = boldActivities ? 
-        boldActivities.map(match => match.replace(/\*\*/g, '').toLowerCase().trim()) : [];
+        boldActivities.map((match: string) => match.replace(/\*\*/g, '').toLowerCase().trim()) : [];
       
       // Extract mood from AI response
       const extractedMood = aiResponse.toLowerCase().includes('energetic') ? 'Energetic' :
@@ -106,7 +106,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
           aiResponse.toLowerCase().includes(word) && 
           !availableActivityNames.some(existing => existing.toLowerCase().includes(word))
         ),
-        ...extractedBoldActivities.filter(activity => 
+        ...extractedBoldActivities.filter((activity: string) => 
           quickAddableCustoms.includes(activity) &&
           !availableActivityNames.some(existing => existing.toLowerCase().includes(activity))
         )
@@ -239,7 +239,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
                               name: customActivity.charAt(0).toUpperCase() + customActivity.slice(1),
                               category: 'Custom',
                               icon: '✨',
-                              defaultMood: ((window as any).lastAIMood || 'Happy') as const
+                              defaultMood: ((window as any).lastAIMood || 'Happy') as 'Happy' | 'Energetic' | 'Relaxed' | 'Focused'
                             };
                             add(days[0], customActivityObj);
                           } else {
@@ -319,7 +319,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
                         name: selectedActivityToAdd.name.charAt(0).toUpperCase() + selectedActivityToAdd.name.slice(1),
                         category: 'Custom',
                         icon: '✨',
-                        defaultMood: ((window as any).lastAIMood || 'Happy') as const
+                        defaultMood: ((window as any).lastAIMood || 'Happy') as 'Happy' | 'Energetic' | 'Relaxed' | 'Focused'
                       };
                       add(day, customActivityObj);
                     } else {

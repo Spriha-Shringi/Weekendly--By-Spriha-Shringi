@@ -45,7 +45,7 @@ export function PosterGenerator() {
         logging: false,
         imageTimeout: 15000,
         onclone: (clonedDoc) => {
-          const clonedElement = clonedDoc.querySelector('[data-poster]');
+          const clonedElement = clonedDoc.querySelector('[data-poster]') as HTMLElement;
           if (clonedElement) {
             clonedElement.style.display = 'block';
             clonedElement.style.visibility = 'visible';
@@ -65,9 +65,9 @@ export function PosterGenerator() {
       
       console.log('Poster generated successfully');
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to generate poster:', error);
-      alert(`Failed to generate poster: ${error.message}`);
+      alert(`Failed to generate poster: ${error.message || 'Unknown error'}`);
     } finally {
       // Hide the poster again
       node.style.display = 'none';
@@ -106,12 +106,7 @@ export function PosterGenerator() {
     Focused: '🎯'
   };
 
-  const moodColors = {
-    Energetic: 'from-orange-400 to-red-500',
-    Relaxed: 'from-green-400 to-blue-500', 
-    Happy: 'from-yellow-400 to-pink-500',
-    Focused: 'from-blue-400 to-purple-500'
-  };
+  // Removed unused moodColors object
 
   const sortedDays = days.sort((a, b) => {
     const dayOrder = ["Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"];
