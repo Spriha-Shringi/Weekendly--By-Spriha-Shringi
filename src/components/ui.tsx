@@ -46,6 +46,7 @@ import {
   type PropsWithChildren,
   forwardRef,
 } from "react";
+import { createPortal } from "react-dom";
 export const Card = forwardRef<
   HTMLDivElement,
   PropsWithChildren<HTMLAttributes<HTMLDivElement>>
@@ -67,7 +68,7 @@ export function Button({
 }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
   return (
     <button
-      className={`px-3 py-2 rounded-xl bg-[rgb(var(--primary))] text-white hover:opacity-90 active:opacity-80 transition focus-ring ${className}`}
+      className={`px-3 py-2 rounded-xl bg-[rgb(var(--primary))] text-white dark:text-gray-100 hover:opacity-90 active:opacity-80 transition focus-ring font-medium ${className}`}
       {...rest}
     >
       {children}
@@ -81,7 +82,7 @@ export function GhostButton({
 }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
   return (
     <button
-      className={`px-3 py-2 rounded-xl border border-black/10 bg-transparent hover:bg-black/5 dark:hover:bg-white/5 transition focus-ring ${className}`}
+      className={`px-3 py-2 rounded-xl border border-black/10 dark:border-emerald-500/30 bg-transparent hover:bg-black/5 dark:hover:bg-emerald-500/10 transition focus-ring text-gray-700 dark:text-gray-200 ${className}`}
       {...rest}
     >
       {children}
@@ -97,7 +98,7 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-white/10 ${className}`}
+      className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-emerald-500/20 text-gray-700 dark:text-emerald-200 ${className}`}
     >
       {children}
     </span>
@@ -113,15 +114,15 @@ export function Segmented({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className="inline-flex rounded-xl border border-black/10 p-1 bg-black/5 dark:bg-white/5">
+    <div className="inline-flex rounded-xl border border-black/10 dark:border-emerald-500/30 p-1 bg-black/5 dark:bg-emerald-500/10">
       {options.map((o) => (
         <button
           key={o}
           onClick={() => onChange(o)}
-          className={`px-3 py-1 rounded-lg text-sm ${
+          className={`px-3 py-1 rounded-lg text-sm transition-all duration-200 ${
             o === value
-              ? "bg-white text-black dark:bg-black dark:text-white shadow"
-              : ""
+              ? "bg-white text-gray-900 dark:bg-emerald-600 dark:text-white shadow"
+              : "text-gray-700 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-emerald-500/20"
           }`}
         >
           {o}
@@ -134,15 +135,32 @@ export function Segmented({
 export function Modal({isOpen, onClose, title, children}: {isOpen: boolean, onClose: () => void, title: string, children: React.ReactNode}) {
   if (!isOpen) return null;
   
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
-      <div className="bg-[rgb(var(--card))] rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
+  const modalContent = (
+    <div 
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999] p-4" 
+      onClick={onClose}
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+    >
+      <div 
+        className="bg-[rgb(var(--card))] rounded-2xl p-6 max-w-sm w-full shadow-2xl transform transition-all duration-200 scale-100" 
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <button onClick={onClose} className="text-xl hover:opacity-70">✕</button>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
+          <button 
+            onClick={onClose} 
+            className="text-xl hover:opacity-70 text-gray-700 dark:text-gray-300 p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+          >
+            ✕
+          </button>
         </div>
-        {children}
+        <div className="text-gray-800 dark:text-gray-200">
+          {children}
+        </div>
       </div>
     </div>
   );
+
+  // Render the modal at the document body level using a portal
+  return createPortal(modalContent, document.body);
 }

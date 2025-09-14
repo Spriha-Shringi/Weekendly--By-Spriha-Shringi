@@ -102,14 +102,22 @@ export function DayColumn({ day }: { day: DayId }) {
             key={it.instanceId}
             draggable
             onDragStart={(e) => onDragStart(e, it, idx)}
-            className="p-3 rounded-xl bg-black/5 dark:bg-white/10 flex items-center gap-2 min-w-0"
+            className={`p-3 rounded-xl flex items-center gap-2 min-w-0 cursor-move hover:shadow-md transition-all duration-200 ${
+              it.mood === "Relaxed"
+                ? "activity-card-relaxed"
+                : it.mood === "Energetic"
+                ? "activity-card-energetic"
+                : it.mood === "Happy"
+                ? "activity-card-happy"
+                : "activity-card-focused"
+            }`}
           >
             <div className="flex items-center gap-2 flex-1 min-w-0">
               <span className="text-xl flex-shrink-0" aria-hidden>
                 {it.icon}
               </span>
               <div className="min-w-0 flex-1">
-                <div className="font-medium truncate">{it.name}</div>
+                <div className="font-medium truncate text-[rgb(var(--fg))]">{it.name}</div>
                 <div className="text-xs text-[rgb(var(--muted))] truncate">
                   {it.category}
                 </div>

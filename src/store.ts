@@ -30,8 +30,8 @@ export const useSchedule = create<ScheduleState>()(
   persist(
     (set, get) => ({
       activities: seedActivities,
-      days: ["Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"],
-      schedule: {Thursday: [], Friday: [], Saturday: [], Sunday: [] , Monday: [], Tuesday: []},
+      days: ["Saturday", "Sunday"],
+      schedule: {Saturday: [], Sunday: []},
       theme: "light",
 
       setTheme: (t) => {
