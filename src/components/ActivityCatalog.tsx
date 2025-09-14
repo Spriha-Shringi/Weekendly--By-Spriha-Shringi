@@ -1,13 +1,17 @@
 import { memo, useMemo, useState } from "react";
 import { useSchedule } from "../store";
 import { ActivityCard } from "./ActivityCard";
-import { Card, Badge } from "../components/ui.tsx";
+import { Card, Badge, Modal, Button } from "../components/ui.tsx";
+import type { Activity } from "../types";
 
 export const ActivityCatalog = memo(function ActivityCatalog() {
   const activities = useSchedule((s) => s.activities);
+  const days = useSchedule((s) => s.days);
   const add = useSchedule((s) => s.add);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
+  const [showDayModal, setShowDayModal] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const cats = useMemo(
     () => ["All", ...Array.from(new Set(activities.map((a) => a.category)))],
     [activities]
@@ -52,14 +56,45 @@ export const ActivityCatalog = memo(function ActivityCatalog() {
             key={a.id}
             a={a}
             onAdd={() => {
-              const day = confirm("Add to Saturday? OK for Sat, Cancel for Sun")
-                ? "Saturday"
-                : "Sunday";
-              add(day, a);
+              if (days.length === 1) {
+                add(days[0], a);
+              } else {
+                setSelectedActivity(a);
+                setShowDayModal(true);
+              }
             }}
           />
         ))}
       </div>
+      
+      <Modal 
+        isOpen={showDayModal} 
+        onClose={() => setShowDayModal(false)}
+        title="Choose a Day"
+      >
+        <div className="space-y-3">
+          <p className="text-sm text-[rgb(var(--muted))]">
+            Add "{selectedActivity?.name}" to which day?
+          </p>
+          <div className="grid gap-2">
+            {days.map((day) => (
+              <Button
+                key={day}
+                onClick={() => {
+                  if (selectedActivity) {
+                    add(day, selectedActivity);
+                  }
+                  setShowDayModal(false);
+                  setSelectedActivity(null);
+                }}
+                className="w-full justify-start"
+              >
+                {day}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 });

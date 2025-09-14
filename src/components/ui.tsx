@@ -130,3 +130,19 @@ export function Segmented({
     </div>
   );
 }
+
+export function Modal({isOpen, onClose, title, children}: {isOpen: boolean, onClose: () => void, title: string, children: React.ReactNode}) {
+  if (!isOpen) return null;
+  
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
+      <div className="bg-[rgb(var(--card))] rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">{title}</h3>
+          <button onClick={onClose} className="text-xl hover:opacity-70">✕</button>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
