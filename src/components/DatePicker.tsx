@@ -128,7 +128,7 @@ export function DatePicker() {
               <button
                 key={index}
                 onClick={() => selectWeekend(weekend.saturday, weekend.sunday)}
-                className="w-full p-4 text-left rounded-lg border-2 border-sky-200 dark:border-emerald-600 hover:border-sky-500 dark:hover:border-emerald-400 hover:bg-sky-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-lg"
+                className="w-full p-4 text-left rounded-lg border-2 border-sky-200 dark:border-emerald-600 hover:border-sky-500 dark:hover:border-emerald-400 hover:bg-sky-50 dark:hover:bg-emerald-900/20 hover:text-black dark:hover:text-white transition-all duration-300 hover:shadow-lg"
               >
                 <div className="flex justify-between items-center">
                   <div>

@@ -144,7 +144,7 @@ export function VibeGenerator() {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">🎨 Choose Your Weekend Vibe</h3>
               <button 
                 onClick={() => setIsOpen(false)} 
-                className="text-xl hover:opacity-70 text-gray-700 dark:text-gray-300 p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+                className="text-xl hover:opacity-70 text-gray-700 dark:text-gray-300 p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all"
               >
                 ✕
               </button>
@@ -159,7 +159,7 @@ export function VibeGenerator() {
                 <button
                   key={vibe}
                   onClick={() => setSelectedVibe(vibe)}
-                  className={`p-4 rounded-xl border-2 transition-all ${
+                  className={`p-4 rounded-xl border-2 transition-all hover:text-black dark:hover:text-white ${
                     selectedVibe === vibe 
                       ? 'border-sky-500 dark:border-emerald-500 shadow-lg transform scale-105' 
                       : 'border-sky-200 dark:border-emerald-700 hover:border-sky-400 dark:hover:border-emerald-500'

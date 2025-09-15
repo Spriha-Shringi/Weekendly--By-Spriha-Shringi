@@ -68,7 +68,7 @@ export function Button({
 }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
   return (
     <button
-      className={`px-3 py-2 rounded-xl bg-[rgb(var(--primary))] text-white dark:text-gray-100 hover:opacity-90 active:opacity-80 transition focus-ring font-medium ${className}`}
+      className={`px-3 py-2 rounded-xl bg-[rgb(var(--primary))] text-white dark:text-gray-100 hover:opacity-90 hover:text-white active:opacity-80 transition focus-ring font-medium ${className}`}
       {...rest}
     >
       {children}
@@ -82,7 +82,7 @@ export function GhostButton({
 }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
   return (
     <button
-      className={`px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-500 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 transition focus-ring text-gray-700 dark:text-gray-200 ${className}`}
+      className={`px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-500 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white transition focus-ring text-gray-700 dark:text-gray-200 ${className}`}
       {...rest}
     >
       {children}
@@ -121,9 +121,10 @@ export function Segmented({
           onClick={() => onChange(o)}
           className={`px-3 py-1 rounded-lg text-sm transition-all duration-200 ${
             o === value
-              ? "bg-white text-gray-900 dark:bg-emerald-600 dark:text-white shadow"
-              : "text-gray-700 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-emerald-500/20"
-          }`}
+            ? "bg-white text-gray-900 shadow"
+            : "text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-emerald-500/20"
+        }`}
+        style={o === value ? {backgroundColor: 'rgb(183, 187, 193)', color: 'black'} : {}}
         >
           {o}
         </button>

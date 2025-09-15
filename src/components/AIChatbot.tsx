@@ -187,7 +187,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
               </div>
               <button
                 onClick={stopGeneration}
-                className="px-3 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors font-medium"
+                className="px-3 py-1 text-xs bg-red-500 hover:bg-red-600 text-white hover:text-white rounded-full transition-colors font-medium"
               >
                 🛑 Stop
               </button>

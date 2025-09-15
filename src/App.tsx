@@ -4,8 +4,10 @@ import { Toolbar } from "./components/Toolbar";
 import { LongWeekendDetector } from "./components/LongWeekendDetector";
 import { WeekendCat } from "./components/WeekendCat";
 import { ThemeProvider } from "./theme";
+import { useSchedule } from "./store";
 
 export default function App() {
+  const theme = useSchedule((s) => s.theme);
   return (
     <ThemeProvider>
       <main className="mx-auto p-4 sm:p-6 space-y-6">
@@ -13,7 +15,14 @@ export default function App() {
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-r from-emerald-600 via-purple-600 to-pink-600 dark:from-amber-400 dark:via-orange-400 dark:to-yellow-400 bg-clip-text text-transparent drop-shadow-sm">
             🌟 Weekendly ✨
           </h1>
-          <nav className="text-lg font-medium text-emerald-700 dark:text-amber-300 opacity-90">
+          <nav
+            className="text-lg font-medium text-emerald-700 dark:text-white opacity-90"
+            style={
+              theme === "dark"
+                ? { color: 'white' }
+                : undefined
+            }
+          >
             Plan your perfect weekend
           </nav>
         </header>

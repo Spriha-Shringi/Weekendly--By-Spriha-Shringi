@@ -70,7 +70,7 @@ export function Toolbar() {
     <div className="flex flex-wrap items-center gap-3 justify-between" data-toolbar>
       <div className="flex items-center gap-2">
         <Segmented
-          options={["light", "dark", "system"]}
+          options={["light", "dark"]}
           value={theme}
           onChange={(v) => setTheme(v as any)}
         />

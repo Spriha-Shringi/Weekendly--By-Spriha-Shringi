@@ -4,6 +4,7 @@ import type { ActivityInstance, Mood, DayId } from "../types";
 import { Card, Badge, GhostButton } from "../components/ui.tsx";
 
 export function DayColumn({ day }: { day: DayId }) {
+  const theme = useSchedule((s) => s.theme);
   const list = useSchedule((s) => s.schedule[day] || []);
   const days = useSchedule((s) => s.days);
   const remove = useSchedule((s) => s.remove);
@@ -90,6 +91,11 @@ export function DayColumn({ day }: { day: DayId }) {
               }}
               className="text-xs px-1 py-1 w-6 h-6 rounded-sm flex items-center justify-center text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20"
               title={`Remove ${day} (only first/last days can be removed)`}
+              style={
+                theme === "dark"
+                  ? { color: 'white' }
+                  : undefined
+              }
             >
               ✕
             </GhostButton>

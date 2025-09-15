@@ -7,7 +7,7 @@ interface ScheduleState {
   activities: Activity[];
   days: DayId[];
   schedule: Record<DayId, ActivityInstance[]>;
-  theme: "light" | "dark" | "system";
+  theme: "light" | "dark";
 
   // actions
   setTheme: (t: ScheduleState["theme"]) => void;
@@ -36,13 +36,7 @@ export const useSchedule = create<ScheduleState>()(
 
       setTheme: (t) => {
         set({ theme: t });
-        const htmlTheme =
-          t === "system"
-            ? window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light"
-            : t;
-        document.documentElement.setAttribute("data-theme", htmlTheme);
+        document.documentElement.setAttribute("data-theme", t);
       },
 
       addDay: (d) => {
