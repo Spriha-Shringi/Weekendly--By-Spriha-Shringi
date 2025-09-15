@@ -82,9 +82,70 @@ export function PosterGenerator() {
   // Get user name (could be from localStorage or input)
   const userName = localStorage.getItem('weekendly-user-name') || 'My';
   
-  // Get selected weekend dates
-  const selectedDates = localStorage.getItem('weekendly-selected-date');
-  const dateRange = selectedDates ? JSON.parse(selectedDates).range : 'This Weekend';
+  // Calculate smart date range
+  const getSmartDateRange = () => {
+    const selectedDates = localStorage.getItem('weekendly-selected-date');
+    
+    if (!selectedDates || days.length === 0) {
+      return 'This Weekend';
+    }
+    
+    try {
+      const parsedDates = JSON.parse(selectedDates);
+      
+      // Check if it's actually this weekend (current week)
+      const now = new Date();
+      const currentWeekStart = new Date(now);
+      currentWeekStart.setDate(now.getDate() - now.getDay()); // Start of current week (Sunday)
+      
+      const currentWeekEnd = new Date(currentWeekStart);
+      currentWeekEnd.setDate(currentWeekStart.getDate() + 6); // End of current week (Saturday)
+      
+      // Get the actual date range based on selected days
+      const dayOrder = ["Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"];
+      const sortedSelectedDays = days.sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+      
+      const firstDay = sortedSelectedDays[0];
+      const lastDay = sortedSelectedDays[sortedSelectedDays.length - 1];
+      
+      // Get dates for first and last days
+      const firstDayDate = parsedDates[firstDay.toLowerCase()];
+      const lastDayDate = parsedDates[lastDay.toLowerCase()];
+      
+      if (!firstDayDate || !lastDayDate) {
+        return 'This Weekend';
+      }
+      
+      const startDate = new Date(firstDayDate);
+      const endDate = new Date(lastDayDate);
+      
+      // Check if this is actually the current/upcoming weekend
+      const isThisWeekend = startDate >= currentWeekStart && endDate <= currentWeekEnd;
+      const isUpcomingWeekend = startDate.getTime() - now.getTime() <= 7 * 24 * 60 * 60 * 1000; // Within 7 days
+      
+      if (isThisWeekend || (isUpcomingWeekend && sortedSelectedDays.includes('Saturday') && sortedSelectedDays.includes('Sunday'))) {
+        return 'This Weekend';
+      }
+      
+      // Format the date range
+      const formatDate = (date: Date) => {
+        const month = date.toLocaleDateString('en-US', { month: 'short' });
+        const day = date.getDate();
+        return `${month} ${day}`;
+      };
+      
+      if (startDate.toDateString() === endDate.toDateString()) {
+        return formatDate(startDate);
+      } else {
+        return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+      }
+      
+    } catch (error) {
+      return 'This Weekend';
+    }
+  };
+
+  const dateRange = getSmartDateRange();
 
   // Calculate total activities and mood distribution
   const allActivities = days.flatMap(day => schedule[day] || []);
@@ -155,7 +216,7 @@ export function PosterGenerator() {
               margin: '0 0 20px 0',
               textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
             }}>
-              {userName}'s Weekend
+              {userName === 'My' ? 'My Weekend' : `${userName}'s Weekend`}
             </h1>
             <div style={{ fontSize: '40px', opacity: 0.9, marginBottom: '20px' }}>
               {dateRange}
@@ -167,25 +228,26 @@ export function PosterGenerator() {
 
           {/* Activities */}
           <div style={{
-            backgroundColor: 'rgba(255,255,255,0.95)',
-            borderRadius: '30px',
-            padding: '50px',
-            color: '#1f2937',
-            maxHeight: '1000px',
-            overflow: 'hidden'
+            backgroundColor: 'transparent',
+            padding: '40px',
+            color: 'white',
+            maxHeight: '1200px',
+            overflow: 'hidden',
+            flex: 1
           }}>
-            {sortedDays.slice(0, 2).map((day) => {
+            {sortedDays.filter(day => (schedule[day] || []).length > 0).slice(0, 4).map((day) => {
               const dayActivities = schedule[day] || [];
-              if (dayActivities.length === 0) return null;
               
               return (
-                <div key={day} style={{ marginBottom: '40px' }}>
+                <div key={day} style={{ marginBottom: '30px' }}>
                   <h3 style={{ 
                     fontSize: '48px', 
                     fontWeight: 'bold', 
                     margin: '0 0 25px 0',
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    color: 'white',
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
                   }}>
                     <span style={{ fontSize: '60px', marginRight: '20px' }}>
                       {day === 'Saturday' ? '🌅' : 
@@ -207,7 +269,7 @@ export function PosterGenerator() {
                         <span style={{ fontSize: '40px', marginRight: '25px' }}>
                           {activity.icon}
                         </span>
-                        <span style={{ fontWeight: '600', flex: 1 }}>
+                        <span style={{ fontWeight: '600', flex: 1, color: 'white', textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
                           {activity.name}
                         </span>
                       </div>

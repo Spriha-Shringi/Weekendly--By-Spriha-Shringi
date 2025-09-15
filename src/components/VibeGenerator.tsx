@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, GhostButton, Modal, Card } from "./ui.tsx";
+import { createPortal } from "react-dom";
+import { Button, GhostButton, Card } from "./ui.tsx";
 import { useSchedule } from "../store";
 
 type Vibe = "lazy" | "adventurous" | "family" | "productive" | "cultural" | "selfcare" | "social" | "chill";
@@ -128,11 +129,27 @@ export function VibeGenerator() {
         ✨ Generate Vibe
       </Button>
 
-      <Modal 
-        isOpen={isOpen} 
-        onClose={() => setIsOpen(false)}
-        title="🎨 Choose Your Weekend Vibe"
-      >
+      {isOpen && createPortal(
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999] p-4" 
+          onClick={() => setIsOpen(false)}
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+        >
+          <div 
+            role="dialog"
+            className="bg-[rgb(var(--card))] rounded-2xl p-6 max-w-md w-full shadow-2xl transform transition-all duration-200 scale-100 max-h-[90vh] overflow-y-auto" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">🎨 Choose Your Weekend Vibe</h3>
+              <button 
+                onClick={() => setIsOpen(false)} 
+                className="text-xl hover:opacity-70 text-gray-700 dark:text-gray-300 p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="text-gray-800 dark:text-gray-100">
         <div className="space-y-6">
           {/* Vibe Selector */}
           <div className="grid grid-cols-2 gap-3">
@@ -149,7 +166,7 @@ export function VibeGenerator() {
                   } ${config.gradient}`}
                 >
                   <div className="text-2xl mb-2">{config.emoji}</div>
-                  <div className="font-medium text-sm">{config.name.replace(' Weekend', '')}</div>
+                  <div className="font-medium text-sm text-gray-800 dark:text-gray-200">{config.name.replace(' Weekend', '')}</div>
                 </button>
               );
             })}
@@ -160,12 +177,12 @@ export function VibeGenerator() {
             <div className="flex items-center gap-3 mb-3">
               <span className="text-3xl">{currentConfig.emoji}</span>
               <div>
-                <h3 className="font-semibold text-lg">{currentConfig.name}</h3>
-                <p className="text-sm opacity-75">{currentConfig.description}</p>
+                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-200">{currentConfig.name}</h3>
+                <p className="text-sm text-gray-700 dark:text-gray-300 opacity-75">{currentConfig.description}</p>
               </div>
             </div>
             
-            <div className="text-xs opacity-75">
+            <div className="text-xs text-gray-600 dark:text-gray-400 opacity-75">
               Sample activities: {currentConfig.activities.slice(0, 3).join(", ")}...
             </div>
           </Card>
@@ -173,8 +190,8 @@ export function VibeGenerator() {
           {/* Intensity Slider */}
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <label className="font-medium">Intensity Level</label>
-              <span className="text-sm opacity-75">{intensity}%</span>
+              <label className="font-medium text-gray-800 dark:text-gray-200">Intensity Level</label>
+              <span className="text-sm text-gray-600 dark:text-gray-400 opacity-75">{intensity}%</span>
             </div>
             <input
               type="range"
@@ -184,7 +201,7 @@ export function VibeGenerator() {
               onChange={(e) => setIntensity(Number(e.target.value))}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
             />
-            <div className="flex justify-between text-xs opacity-60">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 opacity-60">
               <span>🌸 Light</span>
               <span>⚡ Intense</span>
             </div>
@@ -203,11 +220,15 @@ export function VibeGenerator() {
             </GhostButton>
           </div>
 
-          <div className="text-xs text-center opacity-60">
+          <div className="text-xs text-center text-gray-600 dark:text-gray-400 opacity-60">
             💡 This will add activities to your current weekend plan
           </div>
         </div>
-      </Modal>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </>
   );
 }
