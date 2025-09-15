@@ -30,8 +30,9 @@ export default function App() {
         <LongWeekendDetector />
         <div className="flex gap-8">
           <section aria-labelledby="catalog" className="w-3.1/5 p-6 bg-gradient-to-br from-white/40 to-sky-50/30 dark:from-stone-900/40 dark:to-emerald-900/20 rounded-3xl border-2 border-sky-100/50 dark:border-emerald-700/30 backdrop-blur-lg shadow-xl">
-        <h2 id="catalog" className="text-2xl font-bold mb-6 bg-gradient-to-r from-sky-600 to-indigo-600 dark:from-emerald-400 dark:to-amber-400 bg-clip-text text-transparent">
-          🎯 Choose Activities
+        <h2 id="catalog" className="text-2xl font-bold mb-6 flex items-center gap-2">
+          <span className="text-2xl">🎯</span>
+          <span className="bg-gradient-to-r from-sky-600 to-indigo-600 dark:from-emerald-400 dark:to-amber-400 bg-clip-text text-transparent">Choose Activities</span>
         </h2>
             <ActivityCatalog />
           </section>
