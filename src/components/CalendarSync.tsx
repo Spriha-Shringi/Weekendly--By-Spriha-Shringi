@@ -111,11 +111,11 @@ export function CalendarSync() {
         title="📅 Export Your Weekend Plan"
       >
         <div className="space-y-4">
-          <p className="text-sm text-[rgb(var(--muted))]">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             Export your weekend schedule to your calendar app or share it with others.
           </p>
           
-          <div className="bg-black/5 dark:bg-white/5 rounded-lg p-3 text-sm">
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm border border-gray-200 dark:border-gray-600">
             <div className="font-medium mb-2">Your Schedule Preview:</div>
             {days.map(day => {
               const activities = schedule[day] || [];
@@ -148,7 +148,7 @@ export function CalendarSync() {
             </GhostButton>
           </div>
           
-          <div className="text-xs text-[rgb(var(--muted))]">
+          <div className="text-xs text-gray-600 dark:text-gray-400">
             💡 The .ics file can be imported into Google Calendar, Apple Calendar, Outlook, or any calendar app.
           </div>
         </div>

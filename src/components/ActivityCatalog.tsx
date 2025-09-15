@@ -34,11 +34,11 @@ export const ActivityCatalog = memo(function ActivityCatalog() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search activities"
-            className="w-full px-4 py-3 rounded-xl border-2 border-sky-200 dark:border-emerald-600 bg-white/90 dark:bg-stone-800/90 focus:border-sky-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-sky-200 dark:focus:ring-emerald-200 transition-all duration-300 text-[rgb(var(--fg))]"
+            className="w-full px-4 py-3 rounded-xl border-2 border-sky-200 dark:border-emerald-600 bg-white/90 dark:bg-stone-800/90 focus:border-sky-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-sky-200 dark:focus:ring-emerald-200 transition-all duration-300 text-[rgb(var(--fg))] placeholder:text-gray-500 dark:placeholder:text-gray-400"
           />
         </div>
         <div className="flex flex-wrap gap-2 items-center justify-between">
-          <div className="flex gap-2 overflow-x-auto flex-1">
+          <div className="flex flex-wrap gap-2 flex-1">
             {cats.map((c) => (
               <button
                 key={c}

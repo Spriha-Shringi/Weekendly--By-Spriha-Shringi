@@ -183,7 +183,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
             <div className="flex items-center justify-between py-2">
               <div className="flex items-center gap-2">
                 <div className="animate-spin w-4 h-4 border-2 border-[rgb(var(--primary))] border-t-transparent rounded-full"></div>
-                <span className="text-sm text-[rgb(var(--muted))]">Thinking...</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">Thinking...</span>
               </div>
               <button
                 onClick={stopGeneration}
@@ -196,13 +196,13 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
           
           {response && !isLoading && (
             <div className="space-y-3">
-              <div className="bg-black/5 dark:bg-white/5 rounded-lg p-3 text-sm">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm border border-gray-200 dark:border-gray-600">
                 {renderResponse(response)}
               </div>
               
               {(suggestedActivities.length > 0 || customSuggestions.length > 0) && (
                 <div className="space-y-2">
-                  <div className="text-xs font-medium text-[rgb(var(--muted))]">
+                  <div className="text-xs font-medium text-gray-600 dark:text-gray-300">
                     Quick Add:
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -303,7 +303,7 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
         title="Choose a Day"
       >
         <div className="space-y-3">
-          <p className="text-sm text-[rgb(var(--muted))]">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             Add "{selectedActivityToAdd?.name}" to which day?
           </p>
           <div className="grid gap-2">

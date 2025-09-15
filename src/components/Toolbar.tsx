@@ -67,7 +67,7 @@ export function Toolbar() {
     return days.includes("Monday") && canAddDay("Tuesday");
   };
   return (
-    <div className="flex flex-wrap items-center gap-3 justify-between">
+    <div className="flex flex-wrap items-center gap-3 justify-between" data-toolbar>
       <div className="flex items-center gap-2">
         <Segmented
           options={["light", "dark", "system"]}

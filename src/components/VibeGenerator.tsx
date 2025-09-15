@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, GhostButton, Modal, Card } from "./ui.tsx";
 import { useSchedule } from "../store";
 
-type Vibe = "lazy" | "adventurous" | "family" | "productive" | "cultural";
+type Vibe = "lazy" | "adventurous" | "family" | "productive" | "cultural" | "selfcare" | "social" | "chill";
 
 interface VibeConfig {
   name: string;
@@ -53,6 +53,30 @@ const vibeConfigs: Record<Vibe, VibeConfig> = {
     gradient: "bg-gradient-to-br from-purple-100 to-violet-100 dark:from-purple-900/20 dark:to-violet-900/20",
     description: "Art, history, and enriching experiences",
     activities: ["Museum Visit", "Concert", "Festival", "Library Visit", "Photography", "Live Music"]
+  },
+  selfcare: {
+    name: "Self-Care Weekend",
+    emoji: "🧘‍♀️",
+    color: "from-pink-500 to-rose-600",
+    gradient: "bg-gradient-to-br from-pink-100 to-rose-100 dark:from-pink-900/20 dark:to-rose-900/20",
+    description: "Wellness, relaxation, and personal rejuvenation",
+    activities: ["Spa Day", "Meditation", "Yoga", "Bath Time", "Aromatherapy", "Skincare"]
+  },
+  social: {
+    name: "Social Weekend",
+    emoji: "👥",
+    color: "from-amber-500 to-orange-600",
+    gradient: "bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/20",
+    description: "Connect with friends and make memories",
+    activities: ["Party", "Board Games", "Movie Night", "Dancing", "Bowling", "Shopping"]
+  },
+  chill: {
+    name: "Chill Weekend",
+    emoji: "😌",
+    color: "from-cyan-500 to-blue-600",
+    gradient: "bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/20 dark:to-blue-900/20",
+    description: "Relaxed vibes with minimal stress",
+    activities: ["Coffee Shop Visit", "Reading", "Movie Night", "Bath Time", "Nature Walk", "Library Visit"]
   }
 };
 

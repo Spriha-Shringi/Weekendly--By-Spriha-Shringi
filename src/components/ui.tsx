@@ -82,7 +82,7 @@ export function GhostButton({
 }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
   return (
     <button
-      className={`px-3 py-2 rounded-xl border border-black/10 dark:border-emerald-500/30 bg-transparent hover:bg-black/5 dark:hover:bg-emerald-500/10 transition focus-ring text-gray-700 dark:text-gray-200 ${className}`}
+      className={`px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-500 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 transition focus-ring text-gray-700 dark:text-gray-200 ${className}`}
       {...rest}
     >
       {children}
@@ -98,7 +98,7 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-black/5 dark:bg-emerald-500/20 text-gray-700 dark:text-emerald-200 ${className}`}
+      className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 ${className}`}
     >
       {children}
     </span>
@@ -142,6 +142,7 @@ export function Modal({isOpen, onClose, title, children}: {isOpen: boolean, onCl
       style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
     >
       <div 
+        role="dialog"
         className="bg-[rgb(var(--card))] rounded-2xl p-6 max-w-sm w-full shadow-2xl transform transition-all duration-200 scale-100" 
         onClick={(e) => e.stopPropagation()}
       >
@@ -154,7 +155,7 @@ export function Modal({isOpen, onClose, title, children}: {isOpen: boolean, onCl
             ✕
           </button>
         </div>
-        <div className="text-gray-800 dark:text-gray-200">
+        <div className="text-gray-800 dark:text-gray-100">
           {children}
         </div>
       </div>
