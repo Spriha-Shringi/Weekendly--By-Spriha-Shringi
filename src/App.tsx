@@ -46,6 +46,9 @@ export default function App() {
           <div className="text-sm text-emerald-700 dark:text-amber-300 font-medium">
             ✨ Offline-ready • 💾 Data persists locally • ❤️ Built with love
           </div>
+          <div className="text-xs text-emerald-600 dark:text-amber-400 mt-2 opacity-75">
+            Created by Spriha Shringi
+          </div>
         </footer>
       </main>
       <WeekendCat />
