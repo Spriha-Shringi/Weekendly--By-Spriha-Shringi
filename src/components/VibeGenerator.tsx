@@ -166,7 +166,12 @@ export function VibeGenerator() {
                   } ${config.gradient}`}
                 >
                   <div className="text-2xl mb-2">{config.emoji}</div>
-                  <div className="font-medium text-sm text-gray-800 dark:text-gray-200">{config.name.replace(' Weekend', '')}</div>
+                  <div 
+                    className="font-medium text-sm text-gray-800 dark:text-gray-200"
+                    style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+                  >
+                    {config.name.replace(' Weekend', '')}
+                  </div>
                 </button>
               );
             })}
@@ -177,12 +182,25 @@ export function VibeGenerator() {
             <div className="flex items-center gap-3 mb-3">
               <span className="text-3xl">{currentConfig.emoji}</span>
               <div>
-                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-200">{currentConfig.name}</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300 opacity-75">{currentConfig.description}</p>
+                <h3 
+                  className="font-semibold text-lg text-gray-800 dark:text-gray-200"
+                  style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+                >
+                  {currentConfig.name}
+                </h3>
+                <p 
+                  className="text-sm text-gray-700 dark:text-gray-300 opacity-75"
+                  style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+                >
+                  {currentConfig.description}
+                </p>
               </div>
             </div>
             
-            <div className="text-xs text-gray-600 dark:text-gray-400 opacity-75">
+            <div 
+              className="text-xs text-gray-600 dark:text-gray-400 opacity-75"
+              style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+            >
               Sample activities: {currentConfig.activities.slice(0, 3).join(", ")}...
             </div>
           </Card>
