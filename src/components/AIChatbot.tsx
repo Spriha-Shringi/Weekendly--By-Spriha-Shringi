@@ -147,13 +147,16 @@ export function AIChatbot({ currentActivities, days }: AIChatbotProps) {
 
   // Simple markdown renderer for AI responses
   const renderResponse = (text: string) => {
+    const theme = useSchedule.getState().theme;
+    const textStyle = theme === "dark" ? { color: 'black' } : undefined;
+    
     return text
       .split('\n')
       .map((line, i) => (
-        <div key={i}>
+        <div key={i} style={textStyle}>
           {line.split(/(\*\*.*?\*\*)/).map((part, j) => {
             if (part.startsWith('**') && part.endsWith('**')) {
-              return <strong key={j}>{part.slice(2, -2)}</strong>;
+              return <strong key={j} style={textStyle}>{part.slice(2, -2)}</strong>;
             }
             return part;
           })}

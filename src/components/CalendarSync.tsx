@@ -115,16 +115,33 @@ export function CalendarSync() {
             Export your weekend schedule to your calendar app or share it with others.
           </p>
           
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm border border-gray-200 dark:border-gray-600">
-            <div className="font-medium mb-2">Your Schedule Preview:</div>
+          <div 
+            className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm border border-gray-200 dark:border-gray-600"
+            style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+          >
+            <div 
+              className="font-medium mb-2"
+              style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+            >
+              Your Schedule Preview:
+            </div>
             {days.map(day => {
               const activities = schedule[day] || [];
               if (activities.length === 0) return null;
               return (
                 <div key={day} className="mb-2">
-                  <div className="font-medium">{day}:</div>
+                  <div 
+                    className="font-medium"
+                    style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+                  >
+                    {day}:
+                  </div>
                   {activities.map(activity => (
-                    <div key={activity.instanceId} className="ml-2 text-xs">
+                    <div 
+                      key={activity.instanceId} 
+                      className="ml-2 text-xs"
+                      style={useSchedule.getState().theme === "dark" ? { color: 'black' } : undefined}
+                    >
                       • {activity.name} ({activity.mood})
                     </div>
                   ))}
